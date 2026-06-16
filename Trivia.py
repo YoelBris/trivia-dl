@@ -4,6 +4,10 @@ import os
 def limpiar_pantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def es_correcta(respuesta_usuario, respuesta_correcta):
+    return respuesta_usuario.strip().lower() == respuesta_correcta.strip().lower()
+
+
 # Trivia de canciones de Dua Lipa
 
 canciones = [
@@ -61,7 +65,7 @@ for i, cancion in enumerate(canciones, start=1):
     respuesta_usuario = input("¿Qué canción es?: ").strip().lower()
     respuesta_correcta = cancion["respuesta"].strip().lower()
 
-    if respuesta_usuario == respuesta_correcta:
+    if es_correcta(respuesta_usuario, respuesta_correcta):
         print("🎉 ¡Correcto!")
         puntaje += 1
     else:
