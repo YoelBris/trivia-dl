@@ -1,0 +1,25 @@
+name: CI Trivia DL
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Instalar Pytest
+        run: pip install pytest
+
+      - name: Ejecutar pruebas
+        run: python -m pytest
