@@ -53,33 +53,38 @@ canciones = [
     }
 ]
 
-puntaje = 0
-limpiar_pantalla()
-print("=== TRIVIA DE CANCIONES DE DUA LIPA ===")
-print("Adivina el nombre de la canción según la pista.\n")
-
-for i, cancion in enumerate(canciones, start=1):
-    print(f"Pregunta {i}")
-    print("Pista:", cancion["pista"])
-
-    respuesta_usuario = input("¿Qué canción es?: ").strip().lower()
-    respuesta_correcta = cancion["respuesta"].strip().lower()
-
-    if es_correcta(respuesta_usuario, respuesta_correcta):
-        print("🎉 ¡Correcto!")
-        puntaje += 1
-    else:
-        print(f"❌ Incorrecto. La respuesta era: {cancion['respuesta']}")
-
-    input("\nPresiona Enter para continuar...")
+def jugar_trivia():
+    puntaje = 0
     limpiar_pantalla()
+    print("=== TRIVIA DE CANCIONES DE DUA LIPA ===")
+    print("Adivina el nombre de la canción según la pista.\n")
 
-print("=== RESULTADO FINAL ===")
-print(f"Puntaje obtenido: {puntaje}/{len(canciones)}")
+    for i, cancion in enumerate(canciones, start=1):
+        print(f"Pregunta {i}")
+        print("Pista:", cancion["pista"])
 
-if puntaje == len(canciones):
-    print("🏆 ¡Perfecto! Eres un verdadero fan de Dua Lipa.")
-elif puntaje >= len(canciones) // 2:
-    print("👏 ¡Muy bien!")
-else:
-    print("🎵 Sigue escuchando a Dua Lipa y vuelve a intentarlo.")
+        respuesta_usuario = input("¿Qué canción es?: ").strip().lower()
+        respuesta_correcta = cancion["respuesta"].strip().lower()
+
+        if es_correcta(respuesta_usuario, respuesta_correcta):
+            print("🎉 ¡Correcto!")
+            puntaje += 1
+        else:
+            print(f"❌ Incorrecto. La respuesta era: {cancion['respuesta']}")
+
+        input("\nPresiona Enter para continuar...")
+        limpiar_pantalla()
+
+    print("=== RESULTADO FINAL ===")
+    print(f"Puntaje obtenido: {puntaje}/{len(canciones)}")
+
+    if puntaje == len(canciones):
+        print("🏆 ¡Perfecto! Eres un verdadero fan de Dua Lipa.")
+    elif puntaje >= len(canciones) // 2:
+        print("👏 ¡Muy bien!")
+    else:
+        print("🎵 Sigue escuchando a Dua Lipa y vuelve a intentarlo.")
+
+
+if __name__ == "__main__":
+    jugar_trivia()
