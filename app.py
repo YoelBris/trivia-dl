@@ -99,7 +99,7 @@ def bienvenida():
             <h1>🎵 Trivia Dua Lipa 🎵</h1>
 
             <h2>
-                ¿Eres un verdadero fan de Dua Lipa? 🎤
+                ¿Eres un verdadero fan de Dua Lipa? ⭐
             </h2>
 
             <p>
