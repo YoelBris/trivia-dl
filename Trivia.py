@@ -1,8 +1,9 @@
-
 import os
+
 
 def limpiar_pantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def es_correcta(respuesta_usuario, respuesta_correcta):
     return respuesta_usuario.strip().lower() == respuesta_correcta.strip().lower()
@@ -52,6 +53,7 @@ canciones = [
         "respuesta": "Love Again"
     }
 ]
+
 
 def jugar_trivia():
     puntaje = 0
