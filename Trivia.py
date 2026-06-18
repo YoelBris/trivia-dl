@@ -6,7 +6,7 @@ def limpiar_pantalla():
 
 
 def es_correcta(respuesta_usuario, respuesta_correcta):
-    return respuesta_usuario.strip() == respuesta_correcta.strip()
+    return respuesta_usuario.strip().lower() == respuesta_correcta.strip().lower()
 
 
 # Trivia de canciones de Dua Lipa
