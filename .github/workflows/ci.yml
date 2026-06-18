@@ -9,7 +9,6 @@ jobs:
 test:
 runs-on: ubuntu-latest
 
-```
 steps:
   - name: Descargar código
     uses: actions/checkout@v4
@@ -45,4 +44,4 @@ steps:
         "text":"❌ INTEGRACIÓN CONTINUA FALLIDA\n\nProyecto: Trivia-DL\nRama: ${{ github.ref_name }}\nAutor: ${{ github.actor }}\n\nCommit:\n${{ github.event.head_commit.message }}\n\nResultado:\n✖ Error durante la inspección de código o la ejecución de pruebas.\n\nRevisar GitHub Actions."
       }' \
       ${{ secrets.SLACK_WEBHOOK_URL }}
-```
+
