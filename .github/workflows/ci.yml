@@ -3,11 +3,12 @@ name: CI Trivia DL
 on:
   push:
     branches:
-      - master
+      - master #cada vez que se ejecuta un push sobre la rama master, se ejecuta este workflow
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #GitHub crea un entorno de ejecución con la última 
+                            #versión de Ubuntu, para realizar la build de CI
 
     steps:
       - name: Descargar código
