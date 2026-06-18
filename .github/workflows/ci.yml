@@ -1,42 +1,48 @@
 name: CI Trivia DL
 
 on:
-  push:
-    branches:
-      - master
+push:
+branches:
+- master
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+test:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Descargar código
-        uses: actions/checkout@v4
+```
+steps:
+  - name: Descargar código
+    uses: actions/checkout@v4
 
-      - name: Instalar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.14'
+  - name: Instalar Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: '3.14'
 
-      - name: Instalar dependencias
-        run: pip install -r requirements.txt
+  - name: Instalar dependencias
+    run: pip install -r requirements.txt
 
-      - name: Inspección de código
-        run: python -m flake8 .
+  - name: Inspección de código
+    run: python -m flake8 .
 
-      - name: Ejecutar pruebas
-        run: python -m pytest
+  - name: Ejecutar pruebas
+    run: python -m pytest
 
-      - name: Notificar éxito en Slack
-        if: success()
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"✅ Trivia-DL: Integración Continua exitosa. Flake8 y Pytest aprobados."}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+  - name: Notificar éxito en Slack
+    if: success()
+    run: |
+      curl -X POST -H 'Content-type: application/json' \
+      --data '{
+        "text":"✅ INTEGRACIÓN CONTINUA EXITOSA\n\nProyecto: Trivia-DL\nRama: ${{ github.ref_name }}\nAutor: ${{ github.actor }}\n\nCommit:\n${{ github.event.head_commit.message }}\n\nResultados:\n✔ Inspección de código (Flake8)\n✔ Pruebas automatizadas (Pytest)"
+      }' \
+      ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Notificar fallo en Slack
-        if: failure()
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"❌ Trivia-DL: La Integración Continua falló. Revisar GitHub Actions."}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+  - name: Notificar fallo en Slack
+    if: failure()
+    run: |
+      curl -X POST -H 'Content-type: application/json' \
+      --data '{
+        "text":"❌ INTEGRACIÓN CONTINUA FALLIDA\n\nProyecto: Trivia-DL\nRama: ${{ github.ref_name }}\nAutor: ${{ github.actor }}\n\nCommit:\n${{ github.event.head_commit.message }}\n\nResultado:\n✖ Error durante la inspección de código o la ejecución de pruebas.\n\nRevisar GitHub Actions."
+      }' \
+      ${{ secrets.SLACK_WEBHOOK_URL }}
+```
