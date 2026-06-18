@@ -26,3 +26,17 @@ jobs:
 
       - name: Ejecutar pruebas
         run: python -m pytest
+
+      - name: Notificar éxito en Slack
+        if: success()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"✅ Trivia-DL: Integración Continua exitosa. Flake8 y Pytest aprobados."}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notificar fallo en Slack
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"❌ Trivia-DL: La Integración Continua falló. Revisar GitHub Actions."}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
